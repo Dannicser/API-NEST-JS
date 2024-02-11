@@ -7,15 +7,16 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
-    "sourceMap": true,
+    "sourceMap": true, // для дебага ts
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,
     "strictNullChecks": false,
-    "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "strict": true, // ругается за any и null для объектов !!!
+    "strictPropertyInitialization": false, // не нужно инициализировать все поля класса, которые указаны
+    "skipLibCheck": true // игнор проверку библиотек на типы
   }
 }
