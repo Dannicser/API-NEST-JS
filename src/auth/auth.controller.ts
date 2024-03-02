@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { AuthDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
-import { ALREADY_REGISTERED_ERROR } from './auth.constants';
+import { USER_ALREADY_REGISTERED } from './auth.constants';
 
 @Controller('auth')
 export class AuthController {
@@ -23,13 +23,18 @@ export class AuthController {
     const oldUser = await this.authService.findUser(dto.login);
 
     if (oldUser) {
-      throw new BadRequestException(ALREADY_REGISTERED_ERROR);
+      throw new BadRequestException(USER_ALREADY_REGISTERED);
     }
 
     return this.authService.createUser(dto);
   }
 
+  @UsePipes(new ValidationPipe())
   @HttpCode(200) // 200 потому что просто входим
   @Post('login')
-  async login(@Body() dto: AuthDto) {}
+  async login(@Body() dto: AuthDto) {
+    const user = await this.authService.validateUser(dto.login, dto.password);
+
+    return this.authService.login(user.email);
+  }
 }
