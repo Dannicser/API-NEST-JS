@@ -14,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  // то что зашил в вебтокен, тут можно делать доп логику
   async validate({ email }: Pick<AuthModel, 'email'>) {
     return email;
   }
