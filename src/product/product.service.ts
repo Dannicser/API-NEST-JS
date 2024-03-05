@@ -69,6 +69,16 @@ export class ProductService {
           reviewAvg: {
             $avg: '$reviews.rating',
           },
+          // reviews: {
+          //   $function: {
+          //     body: `function (review) {
+          //       review.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          //       return review;
+          //     }`,
+          //     args: ['$reviews'], // закидываем все ревью
+          //   },
+          // },
         },
       },
     ]);
