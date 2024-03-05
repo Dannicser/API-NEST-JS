@@ -15,6 +15,7 @@ import { getMongoConfig } from './configs/mongo.config';
     TopPageModule,
     ProductModule,
     ReviewModule,
+
     ConfigModule.forRoot(), // env
     TypegooseModule.forRootAsync({
       imports: [ConfigModule],

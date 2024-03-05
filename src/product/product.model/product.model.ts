@@ -22,7 +22,7 @@ export class ProductModel extends TimeStamps {
   price: number;
 
   @prop()
-  oldPrice: number;
+  oldPrice?: number;
 
   @prop()
   credit: number;
@@ -40,7 +40,7 @@ export class ProductModel extends TimeStamps {
   disAdvantages: string;
 
   @prop({ type: () => [String] }) // type должен вернуть тип
-  categoties: string[];
+  categories: string[];
 
   @prop({ type: () => [String] })
   tags: string[];
