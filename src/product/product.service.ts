@@ -6,7 +6,6 @@ import { ModelType } from '@typegoose/typegoose/lib/types';
 import { ProductModel } from './product.model/product.model';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
-import { ReviewModel } from 'src/review/review.model/review.model';
 
 @Injectable()
 export class ProductService {
