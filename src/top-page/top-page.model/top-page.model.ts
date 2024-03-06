@@ -1,4 +1,4 @@
-import { prop } from '@typegoose/typegoose';
+import { index, prop } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 
 export enum TopLevelCategory {
@@ -32,6 +32,16 @@ export class TopPageAdvatages {
 
 export interface TopPageModel extends Base {}
 
+//делаем ТЕКСТОВЫЕ ИНДЕКСЫ по двум полям
+// @index({
+//   title: 'text',
+//   seoText: 'text',
+// })
+// в этом случае мы не сможешь создать индексы для элементов массива, поэтому объявляем весь документ индексом
+
+@index({
+  '$**': 'text', // весь документ
+})
 export class TopPageModel extends TimeStamps {
   @prop({ enum: TopLevelCategory })
   firstCategory: TopLevelCategory;
@@ -39,10 +49,10 @@ export class TopPageModel extends TimeStamps {
   @prop()
   secondCategory: string;
 
-  @prop()
+  @prop() // { text: true } создает текстовый индекс на title - НО ТОЛЬКО ОДИН ИНДЕКС TYPEORM позволяет использовать
   title: string;
 
-  @prop({ unique: true })
+  @prop({ unique: true }) // любой unique - индекс в db
   alias: string;
 
   @prop()
