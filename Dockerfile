@@ -1,9 +1,10 @@
 FROM node:16-alpine
 WORKDIR /opt/app
 ADD package.json package.json
-RUN npm install --force
+RUN npm i --force
 ADD . .
-RUN npm run build
-RUN npm prune --production 
+
+RUN npm run build --force
+
 CMD ["node", "./dist/main.js"]
 
