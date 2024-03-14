@@ -6,6 +6,7 @@ import { path } from 'app-root-path';
 
 @Module({
   imports: [
+    // лучше отдавать через nginx
     ServeStaticModule.forRoot({
       rootPath: `${path}/uploads`,
       serveRoot: '/static',

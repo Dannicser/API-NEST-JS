@@ -9,6 +9,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'; // env
 import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './configs/mongo.config';
 import { FilesModule } from './files/files.module';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { FilesModule } from './files/files.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getMongoConfig,
-    }), FilesModule,
+    }), FilesModule, TelegramModule,
   ],
   controllers: [AppController],
   providers: [AppService],

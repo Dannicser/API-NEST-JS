@@ -18,15 +18,26 @@ import { REVIEW_NOT_FOUND } from './review.constants';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { UserEmail } from 'src/decorators/user-email.decorator';
 import { IdValidationPipe } from 'src/pipes/id-validation.pipe';
+import { TelegramService } from 'src/telegram/telegram.service';
 
 @Controller('review')
 export class ReviewController {
-  constructor(private readonly reviewService: ReviewService) {}
+  constructor(
+    private readonly reviewService: ReviewService,
+    private readonly telegramService: TelegramService, // при инджекте стороннего модуля не зываваем импортировать его импорты модуля
+  ) {}
 
   @UsePipes(new ValidationPipe()) // валидация!!
   @Post('create')
   async create(@Body() dto: CreateReviewDto) {
     return this.reviewService.create(dto);
+  }
+
+  //telegram
+  @Post('notify')
+  async notify(@Body() dto: CreateReviewDto) {
+    const message = `Имя: ${dto.name}\n Заголовок: ${dto.title} Оценка: ${dto.rating} Товар: ${dto.productId}`;
+    return this.telegramService.sendMessage(message);
   }
 
   //защищаем роут
