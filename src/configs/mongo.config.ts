@@ -2,7 +2,8 @@ import { ConfigService } from '@nestjs/config'; // env
 import { TypegooseModuleOptions } from 'nestjs-typegoose';
 
 // prettier-ignore
-export const getMongoConfig = async ( configService: ConfigService): Promise<TypegooseModuleOptions> => {
+export const getMongoConfig = async (configService: ConfigService): Promise<TypegooseModuleOptions> => {
+  
   return {
     uri: getMongoString(configService),
     ...getMongoOptions(),

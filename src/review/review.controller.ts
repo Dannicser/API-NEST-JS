@@ -34,9 +34,10 @@ export class ReviewController {
   }
 
   //telegram
+  @UsePipes(new ValidationPipe()) // валидация!!
   @Post('notify')
   async notify(@Body() dto: CreateReviewDto) {
-    const message = `Имя: ${dto.name}\n Заголовок: ${dto.title} Оценка: ${dto.rating} Товар: ${dto.productId}`;
+    const message = `Имя: ${dto.name}\nЗаголовок: ${dto.title}\nОценка: ${dto.rating}\nТовар: ${dto.productId}`;
     return this.telegramService.sendMessage(message);
   }
 

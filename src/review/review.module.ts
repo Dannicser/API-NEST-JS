@@ -16,7 +16,6 @@ import { TelegramService } from 'src/telegram/telegram.service';
         },
       },
     ]),
-    TelegramService,
   ],
   providers: [ReviewService],
 })

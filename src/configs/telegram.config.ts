@@ -1,8 +1,18 @@
+import { ConfigService } from '@nestjs/config';
 import { ITelegramOptions } from 'src/telegram/telegram.interface';
 
-export const getTelegramConfig = (): ITelegramOptions => {
+// подключается в asyncRootFactory
+export const getTelegramConfig = (
+  configService: ConfigService,
+): ITelegramOptions => {
+  const token = configService.get('TELEGRAM_BOT_TOKEN');
+
+  if (!token) {
+    throw new Error('telegram token is missed');
+  }
+
   return {
-    chatId: '',
-    token: '',
+    chatId: configService.get('TELEGRAM_CHAT_ID') || '',
+    token,
   };
 };
